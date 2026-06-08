@@ -30,7 +30,8 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
-      // isScrollControlled: true, // allows the sheet to resize when the keyboard opens
+      isScrollControlled:
+          true, // allows the sheet to resize when the keyboard opens
       context: context,
       builder: (ctx) => ExpensesForm(onAddExpense: addExpense),
     );
@@ -39,6 +40,12 @@ class _ExpensesState extends State<Expenses> {
   void addExpense(ExpenseModel expenseToAdd) {
     setState(() {
       dummyData.add(expenseToAdd);
+    });
+  }
+
+  void removeExpense(int indexToRemove) {
+    setState(() {
+      dummyData.removeAt(indexToRemove);
     });
   }
 
@@ -56,7 +63,12 @@ class _ExpensesState extends State<Expenses> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text("ExpensesApp chart"),
-          Expanded(child: ExpensesList(expenses: dummyData)),
+          Expanded(
+            child: ExpensesList(
+              expenses: dummyData,
+              onRemoveExpense: removeExpense,
+            ),
+          ),
         ],
       ),
     );
