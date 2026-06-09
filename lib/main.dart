@@ -1,4 +1,5 @@
 import 'package:expenses_app/expenses.dart';
+import 'package:expenses_app/theme.dart'; // all styles in one place
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,6 +11,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Expenses());
+    return MaterialApp(
+      themeMode: ThemeMode.system, // system, light, dark
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      home: Expenses(),
+    );
   }
 }

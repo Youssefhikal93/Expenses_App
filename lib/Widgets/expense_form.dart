@@ -133,26 +133,25 @@ class _ExpensesFormState extends State<ExpensesForm> {
               ),
             ],
           ),
-          SizedBox(height: 20),
-          SizedBox(
-            width: double.infinity,
-
-            child: DropdownButton(
-              value: selectedCategory,
-              items: Category.values
-                  .map(
-                    (el) => DropdownMenuItem(
-                      value: el,
-                      child: Text(el.name.toUpperCase()),
-                    ),
-                  )
-                  .toList(),
-              onChanged: (value) {
-                setState(() {
-                  selectedCategory = value!;
-                });
-              },
+          SizedBox(height: 30), // more space before dropdown
+          DropdownButtonFormField(
+            initialValue: selectedCategory,
+            decoration: InputDecoration(
+              labelText: "Category", // same underline style as the other fields
             ),
+            items: Category.values
+                .map(
+                  (el) => DropdownMenuItem(
+                    value: el,
+                    child: Text(el.name.toUpperCase()),
+                  ),
+                )
+                .toList(),
+            onChanged: (value) {
+              setState(() {
+                selectedCategory = value!;
+              });
+            },
           ),
           SizedBox(height: 20),
           Row(
