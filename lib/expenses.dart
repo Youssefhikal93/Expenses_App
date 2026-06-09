@@ -31,6 +31,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      useSafeArea: true, // avoids the notch and system UI areas
       isScrollControlled:
           true, // allows the sheet to resize when the keyboard opens
       context: context,
@@ -75,21 +76,31 @@ class _ExpensesState extends State<Expenses> {
       );
     }
 
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add new expense!"),
+        title: Text("💸 Expenses Tracker"),
         actions: [
           IconButton(onPressed: _openAddExpenseOverlay, icon: Icon(Icons.add)),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Chart(expenses: dummyData),
-          Expanded(child: mainContent),
-        ],
-      ),
+      body: isLandscape
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(child: Chart(expenses: dummyData)),
+                Expanded(child: mainContent),
+              ],
+            )
+          : Column(
+              children: [
+                Chart(expenses: dummyData),
+                Expanded(child: mainContent),
+              ],
+            ),
     );
   }
 }
