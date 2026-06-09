@@ -30,3 +30,23 @@ class ExpenseModel {
     Category.work => const Icon(Icons.work),
   };
 }
+
+class ExpenseBucket {
+  ExpenseBucket({required this.category, required this.expenseList});
+
+  ExpenseBucket.forCategory(List<ExpenseModel> allExpenses, this.category)
+    : expenseList = allExpenses.where((el) => el.category == category).toList();
+
+  final Category category;
+  final List<ExpenseModel> expenseList;
+
+  double get totalExpenses {
+    double sum = 0;
+    for (var element in expenseList) {
+      sum += element.amount;
+    }
+    return sum;
+  }
+
+  // return expenseList.fold(0, (sum, element) => sum + element.amount);
+}

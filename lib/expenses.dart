@@ -1,3 +1,4 @@
+import 'package:expenses_app/Widgets/Charts/chart.dart';
 import 'package:expenses_app/Widgets/expense_form.dart';
 import 'package:expenses_app/Widgets/expenses_list.dart';
 import 'package:expenses_app/models/expense_model.dart';
@@ -85,7 +86,7 @@ class _ExpensesState extends State<Expenses> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("ExpensesApp chart"),
+          Chart(expenses: dummyData),
           Expanded(child: mainContent),
         ],
       ),
